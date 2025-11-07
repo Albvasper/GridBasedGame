@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -11,7 +12,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Enemy
   - 
   - 
   - 
@@ -50,7 +51,7 @@ TagManager:
   - name: Collision
     uniqueID: 2519116715
     locked: 0
-  - name: Player
+  - name: Character
     uniqueID: 677884919
     locked: 0
   - name: WalkBehind

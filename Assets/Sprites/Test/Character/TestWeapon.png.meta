@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: a6d01de818aef064ebd204b1867083be
+guid: 071081e51d86f8c468ef69c20a3ef909
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -889863899933786566
-    second: TestTilemap_0
+      213: -8704598827316738883
+    second: TestWeapon_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -100,12 +100,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: TestTilemap_0
+      name: TestWeapon_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 4
         y: 0
-        width: 16
+        width: 8
         height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -115,96 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a3eb00a6f7196a3f0800000000000000
-      internalID: -889863899933786566
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TestTilemap_1
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d0c034b7de85cb2458729ced366266e2
-      internalID: -1861936802
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TestTilemap_2
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 220b33ecf0ad48745950478485ccd508
-      internalID: 1817361036
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TestTilemap_3
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: dadf78460e7813546aa2d5f8e95e43d5
-      internalID: -1264233975
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TestTilemap_4
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2596400d5454e4746906538eb69c7deb
-      internalID: 1084433626
+      spriteID: db401894c7d033780800000000000000
+      internalID: -8704598827316738883
       vertices: []
       indices: 
       edges: []
@@ -213,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: cd8e597e1bc55164aa9aa02f157bf5ae
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -223,11 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      TestTilemap_0: -889863899933786566
-      TestTilemap_1: -1861936802
-      TestTilemap_2: 1817361036
-      TestTilemap_3: -1264233975
-      TestTilemap_4: 1084433626
+      TestWeapon_0: -8704598827316738883
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
