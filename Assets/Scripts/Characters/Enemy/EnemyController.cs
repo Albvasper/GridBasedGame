@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using System.Collections;
 using System;
-using Unity.VisualScripting;
 
 /// <summary>
 /// Handles enemy movement and behavior inside the grid.
@@ -11,7 +10,6 @@ public class EnemyController : MonoBehaviour
 {
     [Header("Behavior Settings")]
     [Range(0f, 4f)][SerializeField] private float movementCooldown = .5f;
-    [Range(0f, 3f)][SerializeField] private float movementSpeed = 1f;
     [SerializeField] private bool canMove = true;
     [SerializeField] private bool verticalMovement = true;
 

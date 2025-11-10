@@ -4,7 +4,7 @@ using System.Collections;
 /// <summary>
 /// Manages characters health system.
 /// </summary>
-public abstract class CharacterHealth : MonoBehaviour
+public abstract class CharacterHealth : MonoBehaviour, IDamageable
 {
     [SerializeField]
     protected int maxHealth = 3;
