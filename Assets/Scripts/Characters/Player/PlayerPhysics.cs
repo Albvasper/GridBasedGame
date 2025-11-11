@@ -15,6 +15,7 @@ public class PlayerPhysics : MonoBehaviour
         enemyLayerMask = LayerMask.NameToLayer("Enemy");
     }
 
+    // TODO: Maybe move this logic to enemy ontrigger enter.
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.layer == enemyLayerMask)

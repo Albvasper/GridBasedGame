@@ -1,28 +1,18 @@
 using UnityEngine;
-using UnityEngine.Tilemaps;
 using System.Collections;
 using System;
 
 /// <summary>
 /// Handles enemy movement and behavior inside the grid.
 /// </summary>
-public class EnemyController : MonoBehaviour
+public class EnemyController : GridBasedObject
 {
     [Header("Behavior Settings")]
     [Range(0f, 4f)][SerializeField] private float movementCooldown = .5f;
     [SerializeField] private bool canMove = true;
     [SerializeField] private bool verticalMovement = true;
 
-    [Header("Tilemaps")]
-    [SerializeField] private Tilemap groundTilemap;
-    [SerializeField] private Tilemap collisionTilemap;
-
-    private Vector2 currentDirection = Vector2.down;
-
-    private void Awake()
-    {
-        SnapToGrid();
-    }
+    private Vector2 direction = Vector2.down;
 
     private void Start()
     {
@@ -35,41 +25,20 @@ public class EnemyController : MonoBehaviour
         {
             yield return new WaitForSeconds(movementCooldown);
             // Get next position
-            Vector3 targetPos = transform.position + (Vector3)currentDirection;
+            Vector3 targetPos = transform.position + (Vector3)direction;
             targetPos = SnapToGridCenter(targetPos);
 
             // Check if next position is valid
             if (IsNextTileAvailable(targetPos))
             {
                 // if position is valid move to the next tile
-                transform.position = targetPos;
+                rb.MovePosition(targetPos);
             }
             else
             {
                 // if not, change directions
-                currentDirection = -currentDirection;
+                direction = -direction;
             }
         }
-    }
-
-    private Vector3 SnapToGridCenter(Vector3 position)
-    {
-        const float tileCenter = 0.5f;
-        return new Vector3(
-            Mathf.Floor(position.x) + tileCenter,
-            Mathf.Floor(position.y) + tileCenter,
-            position.z
-        );
-    }
-
-    private void SnapToGrid()
-    {
-        transform.position = SnapToGridCenter(transform.position);
-    }
-
-    private bool IsNextTileAvailable(Vector3 targetWorldPos)
-    {
-        Vector3Int gridPosition = groundTilemap.WorldToCell(targetWorldPos);
-        return groundTilemap.HasTile(gridPosition) && !collisionTilemap.HasTile(gridPosition);
     }
 }

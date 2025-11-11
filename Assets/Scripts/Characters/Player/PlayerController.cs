@@ -9,7 +9,7 @@ using System.Collections;
 /// <summary>
 /// Handles player input and snaps it to the grid.
 /// </summary>
-public class PlayerController : MonoBehaviour
+public class PlayerController : GridBasedObject
 {
     private const float InputThreshold = 0.01f;
 
@@ -27,23 +27,12 @@ public class PlayerController : MonoBehaviour
     [Range(0f, 4f)][SerializeField] private float attackRangeX = 1f;
     [Range(0f, 4f)][SerializeField] private float attackRangeY = 1f;
     [SerializeField] private LayerMask enemyLayerMask;
-    
-    [Header("Tilemaps")]
-    [SerializeField] private Tilemap groundTilemap;
-    [SerializeField] private Tilemap collisionTilemap;
 
-    private Rigidbody2D rb;
     private bool isMoving;
     private Vector2 moveInput;
     private Vector2 currentDirection = Vector2.down;
     private bool isAttacking = false;
     private float nextAttackTime = 0f;
-
-    private void Awake()
-    {
-        rb = GetComponent<Rigidbody2D>();
-        SnapToGrid();
-    }
 
     private void OnDrawGizmosSelected()
     {
@@ -148,7 +137,6 @@ public class PlayerController : MonoBehaviour
         Physics2D.OverlapBoxAll (attackArea.position, new Vector2(attackRangeX, attackRangeY), 0f, enemyLayerMask);
         for (int i = 0; i < enemiesToDamage.Length; i++)
         {
-            Debug.Log(enemiesToDamage[i].name);
             // TODO: Cache get component!
             enemiesToDamage[i].GetComponent<EnemyHealth>().TakeDamage(damage);
         }
@@ -168,27 +156,5 @@ public class PlayerController : MonoBehaviour
         return Mathf.Abs(input.x) > Mathf.Abs(input.y)
             ? new Vector2(Mathf.Sign(input.x), 0)
             : new Vector2(0, Mathf.Sign(input.y));
-    }
-
-    private Vector3 SnapToGridCenter(Vector3 position)
-    {
-        const float tileCenter = 0.5f;
-        return new Vector3(
-            Mathf.Floor(position.x) + tileCenter,
-            Mathf.Floor(position.y) + tileCenter,
-            position.z
-        );
-    }
-    
-    private void SnapToGrid()
-    {
-        rb.MovePosition(SnapToGridCenter(transform.position));
-    }
-    
-    
-    private bool IsNextTileAvailable(Vector3 targetWorldPos)
-    {
-        Vector3Int gridPosition = groundTilemap.WorldToCell(targetWorldPos);
-        return groundTilemap.HasTile(gridPosition) && !collisionTilemap.HasTile(gridPosition);
     }
 }
