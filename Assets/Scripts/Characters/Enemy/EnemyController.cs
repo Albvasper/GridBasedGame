@@ -32,7 +32,7 @@ public class EnemyController : GridBasedObject
             if (IsNextTileAvailable(targetPos))
             {
                 // if position is valid move to the next tile
-                rb.MovePosition(targetPos);
+                Rb.MovePosition(targetPos);
             }
             else
             {

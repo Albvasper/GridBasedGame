@@ -11,12 +11,12 @@ public abstract class CharacterHealth : MonoBehaviour, IDamageable
     protected int health;
     protected SpriteRenderer spriteRenderer;
 
-    protected void Awake()
+    protected virtual void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    protected virtual void Start()
+    protected void Start()
     {
         health = maxHealth;
     }
@@ -38,7 +38,7 @@ public abstract class CharacterHealth : MonoBehaviour, IDamageable
         spriteRenderer.color = Color.white;
     }
 
-    protected void Die()
+    protected virtual void Die()
     {
         Destroy(gameObject);
     }

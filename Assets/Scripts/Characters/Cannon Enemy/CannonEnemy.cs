@@ -30,8 +30,8 @@ public class CannonEnemy : MonoBehaviour
         {
             yield return new WaitForSeconds(shootingRate);
             var bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
-            bullet.GetComponent<BulletEnemy>().groundTilemap = groundTilemap;
-            bullet.GetComponent<BulletEnemy>().collisionTilemap = collisionTilemap;
+            bullet.GetComponent<BulletEnemy>().GroundTilemap = groundTilemap;
+            bullet.GetComponent<BulletEnemy>().CollisionTilemap = collisionTilemap;
         }
     }
 }

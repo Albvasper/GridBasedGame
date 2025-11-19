@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class HarmingTile : MonoBehaviour
+public class HarmingTile : GridBasedObject
 {
     [Header("Damage Settings")]
     [Range(1, 5)][SerializeField] private int damage = 1;
@@ -14,16 +14,20 @@ public class HarmingTile : MonoBehaviour
     [SerializeField] private Sprite dealingDamageSprite;
 
     private SpriteRenderer spriteRenderer;
-    private BoxCollider2D boxCollider2D;
-    
-    private void Awake()
+    private BoxCollider2D boxCollider2D;    
+    public bool IsDealingDamage { get; set; }
+
+    protected override void Awake()
     {
+        base.Awake();
         spriteRenderer = GetComponent<SpriteRenderer>();
         boxCollider2D = GetComponent<BoxCollider2D>();
+        boxCollider2D.enabled = false;
     }
 
     private void OnEnable()
     {
+        IsDealingDamage = false;
         boxCollider2D.enabled = false;
         spriteRenderer.sprite = preDamageSprite;
         StartCoroutine(WaitToDealDamage());
@@ -31,19 +35,20 @@ public class HarmingTile : MonoBehaviour
 
     private void OnDisable()
     {
+        boxCollider2D.enabled = false;
+        IsDealingDamage = false;
         StopAllCoroutines();
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        // Check layer mask
-        if (!IsInLayerMask(other.gameObject.layer, playerLayerMask))
-            return;
-        // Check if its damagable
-        IDamageable target = other.GetComponent<IDamageable>();
-        if (target == null)
-            return;
-        target.TakeDamage(damage);
+        // Check layer mask 
+        if (IsInLayerMask(other.gameObject.layer, playerLayerMask))
+        {
+            // Check if its damagable
+            if (other.TryGetComponent<IDamageable>(out var player))
+                player.TakeDamage(damage);
+        }
     }
 
     private IEnumerator WaitToDealDamage()
@@ -54,6 +59,7 @@ public class HarmingTile : MonoBehaviour
 
     private IEnumerator DealDamage()
     {
+        IsDealingDamage = true;
         spriteRenderer.sprite = dealingDamageSprite;
         boxCollider2D.enabled = true;
         yield return new WaitForSeconds(timeDealingDamage);

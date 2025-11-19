@@ -121,10 +121,10 @@ public class PlayerController : GridBasedObject
             float t = elapsed / moveDuration;
             t = t * t * (3f - 2f * t);
 
-            rb.MovePosition(Vector3.Lerp(startPos, targetPos, t));
+            Rb.MovePosition(Vector3.Lerp(startPos, targetPos, t));
             yield return null;
         }
-        rb.MovePosition(targetPos);
+        Rb.MovePosition(targetPos);
     }
 
     private IEnumerator Attack()

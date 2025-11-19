@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 /// <summary>
@@ -6,16 +7,19 @@ using System.Collections;
 /// </summary>
 public class PlayerHealth : CharacterHealth
 {
-    private BoxCollider2D boxCollider2D;
-    private float damageCooldown = 3f;      // Time after a hit to enable collider and stop blinking animation.
-    private float blinkInterval = 0.1f;     // Interval between blinking sprite in damage animation.
 
-    protected override void Start()
+    private const float RespawnWaitTime = 3f;     // Time between death and respawn.
+    
+    private BoxCollider2D boxCollider2D;
+    private float damageCooldown = 3f;            // Time after a hit to enable collider and stop blinking animation.
+    private float blinkInterval = 0.1f;           // Interval between blinking sprite in damage animation.
+
+    protected override void Awake()
     {
-        base.Start();
+        base.Awake();
         boxCollider2D = GetComponent<BoxCollider2D>();
     }
-
+    
     public override void TakeDamage(int damage)
     {
         StartCoroutine(TakeDamageAnimation());
@@ -26,7 +30,7 @@ public class PlayerHealth : CharacterHealth
             Die();
         }
     }
-
+    
     protected override IEnumerator TakeDamageAnimation()
     {
         Color transparent = Color.white;
@@ -51,5 +55,22 @@ public class PlayerHealth : CharacterHealth
         boxCollider2D.enabled = false;
         yield return new WaitForSeconds(damageCooldown);
         boxCollider2D.enabled = true;
+    }
+
+    protected override void Die()
+    {
+        StartCoroutine(WaitForRespawn());
+    }
+
+    private IEnumerator WaitForRespawn()
+    {
+        yield return new WaitForSeconds(RespawnWaitTime);
+        Respawn();
+    }
+
+    private void Respawn()
+    {
+        Scene currentScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(currentScene.name);
     }
 }
